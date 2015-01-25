@@ -90,7 +90,7 @@ STATICFILES_DIRS = (
 
 )
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
+#dependency on full serializer https://github.com/Nuevosmedios/wadofstuff-django-serializers.git
 SERIALIZATION_MODULES = {
-    'json': 'wadofstuff.django.serializers.custom_json'
+    'json': 'wadofstuff.django.serializers.json_reloaded'
 }
