@@ -3,9 +3,13 @@ A Python(django) based twitter implementation
 -----------------------------
 installation  requirements
 ------------------------------
-django 1.7 
+django 1.7
+
 python 2.7 
+
 mysql 5.5
+
+boottstrap 3.3
 https://github.com/Nuevosmedios/wadofstuff-django-serializers.git
 
 please check the patch for wadostuff
