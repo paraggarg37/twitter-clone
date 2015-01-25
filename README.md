@@ -13,13 +13,16 @@ Installation
 edit twitter/setting.py and update database information
 
 cd twitter
-</br>
+
+
 run command 
-</br>
+
  ./manage.py makemigrations app #make migrations 
- </br>
+ 
+ 
  ./manage.py migrate #create tables 
- </br>
+ 
+ 
  ./manage.py runserver #can run on any port defualt 8000
 
 
