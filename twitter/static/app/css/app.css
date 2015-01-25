@@ -1,0 +1,59 @@
+.bar{
+    min-height: 80px;
+}
+
+.dp-container{
+    position: relative;
+    z-index: 2;
+    margin-top: -50px;
+}
+.white{
+    color: #ffffff;
+}
+.dp-container span{
+    font-size: 40px;
+}
+
+.heading{
+    margin:0;
+}
+.sub-heading{
+    font-size: 12px;
+    font-weight: 300;
+}
+.values-conatiner b{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.values-conatiner span{
+    color: #0084B4 !important;
+}
+
+#tweets{
+
+    margin-top: 30px;
+}
+
+#search_result{
+    position: absolute;
+z-index: 10;
+    margin-top: 10px;
+    width: 300px;
+}
+
+.list-group-item:hover{
+    background-color: #eee;
+}
+
+#following-container,#followers-container{
+    margin-top: 30px;
+}
+
+.user-name{
+color: #0084B4 !important;
+}
+
+.null-hover:hover{
+    background: #ffffff!important;
+}

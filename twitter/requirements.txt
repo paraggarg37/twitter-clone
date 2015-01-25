@@ -1,0 +1,9 @@
+python 2.7
+Mysql 5.5
+wadofstuff-django-serializers
+
+patch for wadofstuff django 1.7 
+https://code.google.com/p/wadofstuff/issues/detail?id=22
+
+simplejson
+bootstrap

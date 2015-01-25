@@ -1,0 +1,81 @@
+{% extends "app/home.html" %}
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+           <div class="list-group">
+                               <a href="#" class="list-group-item active bar">
+
+                               </a>
+                              <span href="#" class="list-group-item bar null-hover clearfix">
+                                  <div class="clearfix">
+                                      <div class="dp-container float-left">
+
+                                        <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-2x white"></i>
+                                          <i class="fa fa-user fa-stack-1x "></i>
+                                        </span>
+
+                                      </div>
+                                      <div class="col-lg-10 clearfix">
+                                         <h5 class="heading">
+                                             <a href="/{{user.username}}" >{{user.first_name}}  {{user.last_name}}</a>
+                                         </h5>
+                                          <p class="sub-heading">@{{user.username}}</p>
+
+                                          {% if logged_in_user.username != user.username %}
+
+                                             {% if local.isfollowing == 1%}
+                                                <button class="btn btn-danger follow-unfollow" data-user="{{user.pk}}" data-operation="unfollow">
+                                                    Unfollow
+                                                </button>
+                                            {% endif %}
+                                            {% if local.isfollowing == 0%}
+
+                                                <button class="btn btn-success follow-unfollow"  data-user="{{user.pk}}" data-operation="follow">
+                                                Follow
+                                                 </button>
+
+                                            {% endif %}
+
+                                      {% endif %}
+                                      </div>
+
+                                  </div>
+                                  <div class="clearfix">
+                                      <div class="col-lg-8 col-lg-offset-2">
+
+            <div class="clearfix">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#tweetcontainer" id="tweetcontainer-tab" role="tab" data-toggle="tab" aria-controls="tweetcontainer" aria-expanded="true">Tweets <span class="badge">{{local.tweets}}</span></a></li>
+                  <li role="presentation"><a href="#following" role="tab" id="following-tab" data-toggle="tab" aria-controls="following">Following <span class="badge">{{local.following}}</span></a></li>
+                  <li role="presentation"><a href="#followers" role="tab" id="followers-tab" data-toggle="tab" aria-controls="followers">Followers <span class="badge">{{local.followers}}</span></a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div role="tabpanel" class="tab-pane fade in active" id="tweetcontainer" aria-labelledby="tweetcontainer-tab">
+
+                       <div class="tweets clearfix" data-user="{{local.user.pk}}" id="tweets" data-tweets="me"></div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade clearfix" id="following" aria-labelledby="following-tab">
+                        <div id="following-container" class="people-container clearfix list-group"></div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade clearfix" id="followers" aria-labelledby="following-tab">
+                        <div id="followers-container" class="people-container clearfix list-group"></div>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+                                  </div>
+                              </span>
+                            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

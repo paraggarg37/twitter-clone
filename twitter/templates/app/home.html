@@ -1,0 +1,210 @@
+{% extends "app/header.html" %}
+{% load staticfiles %}
+
+
+
+{% block title %}Welcome {{user.username}}{% endblock %}
+
+{% block css %}
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/app.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+   <script src="{% static 'app/js/underscore.js' %}"></script>
+   <script src="{% static 'app/js/app.js' %}"></script>
+
+{% endblock %}
+
+
+{% block template %}
+    <script type="text/template" id="tweetTemplate">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <span class="fa-stack fa-lg media-object">
+                                <i class="fa fa-circle-thin fa-stack-2x "></i>
+                                <i class="fa fa-user fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <b class="media-heading">
+                            <%= data.fields.user.fields.first_name %> <%= data.fields.user.fields.last_name %><span class="text-muted sub-heading "> @<%= data.fields.user.fields.email %> - <span class="stamp"><%= data.fields.stamp %></span></span>
+                        </b>
+                        <p><%= data.fields.tweet %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+    <script type="text/template" id="user-tweetTemplate">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <span class="fa-stack fa-lg media-object">
+                                <i class="fa fa-circle-thin fa-stack-2x "></i>
+                                <i class="fa fa-user fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <b class="media-heading">
+                            {{user.first_name}} {{user.last_name}}
+                           <span class="text-muted sub-heading "> @{{user.email}} - <span class="stamp">0 sec ago</span></span>
+                        </b>
+                        <p><%= post %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+
+
+    <script type="text/template" id="searchTemplate">
+         <a class="list-group-item" href="/<%= data.fields.username %>">
+            <div class="media">
+                <div class="media-left">
+                    <span href="#">
+                        <span class="fa-stack fa-lg media-object">
+                            <i class="fa fa-circle-thin fa-stack-2x "></i>
+                            <i class="fa fa-user fa-stack-1x "></i>
+                        </span>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <b class="media-heading user-name">
+                        <%= data.fields.first_name%> <%= data.fields.last_name %>
+                     </b>
+                    <p class="text-muted sub-heading "> @<%= data.fields.username %> </p>
+                </div>
+            </div>
+         </a>
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+            {% block nav %}
+                <nav class="navbar navbar-default">
+                  <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="#">Twitter</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <ul class="nav navbar-nav">
+                        <li class="{% if home %}{{home}}{% endif %}">
+                            <a href="{% url 'twitter:home'%}">Home<span class="sr-only">(current)</span></a>
+                        </li>
+
+
+                      </ul>
+                      <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Search" id="search">
+                        </div>
+
+                          <div class="list-group" id="search_result"></div>
+                      </form>
+                      <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'twitter:logout'%}">Logout</a></li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container-fluid -->
+                </nav>
+            {% endblock %}
+
+            {% block container %}
+               <div class="row">
+                   <div class="col-lg-3 col-lg-offset-1">
+                       {% block sidebar %}
+                            <div class="list-group">
+                               <a href="#" class="list-group-item active bar">
+
+                               </a>
+                              <span href="#" class="list-group-item bar">
+                                  <div class="clearfix">
+                                      <div class="dp-container col-lg-4">
+
+                                        <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-2x white"></i>
+                                          <i class="fa fa-user fa-stack-1x "></i>
+                                        </span>
+
+                                      </div>
+                                      <div class="col-lg-8">
+                                         <h5 class="heading">
+                                             <a href="/{{user.username}}" >{{user.first_name}}  {{user.last_name}}</a>
+                                         </h5>
+                                          <span class="sub-heading">@{{user.username}}</span>
+                                      </div>
+                                  </div>
+                                  <div class="clearfix">
+                                      <div class="col-lg-4 text-center values-conatiner">
+                                          <b class="text-muted">TWEETS</b>
+                                          <span>{{local.tweets}}</span>
+                                      </div>
+                                      <div class="col-lg-4 text-center values-conatiner">
+                                          <b class="text-muted">FOLLOWING</b>
+                                          <span>{{local.following}}</span>
+                                      </div>
+                                      <div class="col-lg-4 text-center values-conatiner">
+                                          <b class="text-muted">FOLLOWERS</b>
+                                          <span>{{local.followers}}</span>
+                                      </div>
+                                  </div>
+                              </span>
+                            </div>
+                       {% endblock %}
+                   </div>
+                   <div class="col-lg-7">
+                       {% block contentholder %}
+                            <div class="main-block">
+                                <div class="tweet-container">
+
+                                    <div class="form-group">
+                                        <textarea id="post_tweet" rows="3" class="form-control" placeholder="what's happening?" ></textarea>
+                                    </div>
+                                    <button class="btn btn-primary" id="submit_tweet">Post</button>
+
+
+
+                                    <div class="tweets clearfix" data-user="{{local.user.pk}}" data-tweets="following" id="tweets">
+                                    </div>
+
+                                </div>
+                            </div>
+                       {% endblock %}
+                   </div>
+               </div>
+            {% endblock %}
+
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "app/header.html" %}
+{% load staticfiles %}
+{% block title %}login: twitter{% endblock %}
+
+{% block css %}
+<link href="{% static 'app/css/signin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+   <script src="{% static 'app/js/login.js' %}"></script>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+
+      <form class="form-signin">
+
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+          <p class="text-danger"><span id="error"></span></p>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a class="btn btn-lg btn-block btn-success" href="{% url 'twitter:register'%}">Register</a>
+      </form>
+
+</div>
+{% endblock %}
+
+
